@@ -56,7 +56,6 @@ function createPokemonCard(data) {
     image.src = data.sprites.other['official-artwork']['front_default'];
     image.alt = data.name;
     image.setAttribute('loading', 'lazy');
-    image.classList.add('visibility');
 
     const button = createElement(
         'button',
