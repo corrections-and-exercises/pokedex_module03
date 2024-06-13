@@ -27,11 +27,17 @@ fetchAllBtn.addEventListener('click', () => {
 
 async function displayFirstGeneration() {
     container.innerHTML = '';
+    const promises = [];
     for (let i = 1; i <= 151; i++) {
-        const pokemon = await fetchPokemon(i);
+        promises.push(fetchPokemon(i));
+    }
+
+    // fetching pokemon concurrently
+    const pokemon = await Promise.all(promises);
+    pokemon.forEach((pokemon) => {
         const pokemonCard = createPokemonCard(pokemon);
         container.appendChild(pokemonCard);
-    }
+    });
 }
 
 function createPokemonCard(data) {
