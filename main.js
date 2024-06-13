@@ -9,6 +9,7 @@ const fetchAllBtn = document.querySelector('#all');
 const localCache = {};
 const mapIdToName = {};
 
+let page = 1;
 displayFirstGeneration();
 
 form.addEventListener('submit', async (event) => {
@@ -28,23 +29,13 @@ fetchAllBtn.addEventListener('click', () => {
 async function displayFirstGeneration() {
     container.innerHTML = '';
     let promises = [];
-    for (let i = 1; i <= 50; i++) {
+
+    for (let i = 1; i <= 151; i++) {
         promises.push(fetchPokemon(i));
     }
 
-    // fetching pokemon concurrently
     const firstBatch = await Promise.all(promises);
     firstBatch.forEach((pokemon) => {
-        const pokemonCard = createPokemonCard(pokemon);
-        container.appendChild(pokemonCard);
-    });
-
-    promises = [];
-    for (let i = 51; i <= 151; i++) {
-        promises.push(fetchPokemon(i));
-    }
-    const secondBatch = await Promise.all(promises);
-    secondBatch.forEach((pokemon) => {
         const pokemonCard = createPokemonCard(pokemon);
         container.appendChild(pokemonCard);
     });
@@ -64,6 +55,7 @@ function createPokemonCard(data) {
     const image = document.createElement('img');
     image.src = data.sprites.other['official-artwork']['front_default'];
     image.alt = data.name;
+    image.setAttribute('loading', 'lazy');
 
     const button = createElement(
         'button',
