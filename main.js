@@ -46,7 +46,7 @@ function createPokemonCard(data) {
         'border',
         'rounded',
         'bg-slate-100',
-        'w-40',
+        'w-1/4',
     ]);
 
     const title = data.name[0].toUpperCase() + data.name.slice(1);
@@ -56,6 +56,7 @@ function createPokemonCard(data) {
     image.src = data.sprites.other['official-artwork']['front_default'];
     image.alt = data.name;
     image.setAttribute('loading', 'lazy');
+    image.classList.add('visibility');
 
     const button = createElement(
         'button',
