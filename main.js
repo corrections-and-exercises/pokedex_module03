@@ -46,7 +46,7 @@ function createPokemonCard(data) {
         'border',
         'rounded',
         'bg-slate-100',
-        'w-1/4',
+        'w-40',
     ]);
 
     const title = data.name[0].toUpperCase() + data.name.slice(1);
